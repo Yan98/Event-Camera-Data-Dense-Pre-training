@@ -41,7 +41,7 @@ python dataset.py
 
 ```
 
-@@misc{yang2023eventcameradatadense,
+@misc{yang2023eventcameradatadense,
       title={Event Camera Data Dense Pre-training}, 
       author={Yan Yang and Liyuan Pan and Liu Liu},
       year={2023},
