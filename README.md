@@ -21,7 +21,7 @@ Transfer learning performance on downstream dense prediction tasks illustrates t
 <img src="asset/model.png", width=600/>
 </div>
 
-## Requirements
+## Requirement
 
 Please refer to [requirements.txt](./requirements.txt).
 
