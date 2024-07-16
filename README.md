@@ -18,7 +18,7 @@ Transfer learning performance on downstream dense prediction tasks illustrates t
 ## Framework
 
 <div align=center>
-<img src="asset/model.png", width=500/>
+<img src="asset/model.png", width=600/>
 </div>
 
 ## Requirements
