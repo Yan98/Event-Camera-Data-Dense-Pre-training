@@ -40,7 +40,6 @@ python dataset.py
 ## Citation
 
 ```
-
 @misc{yang2023eventcameradatadense,
       title={Event Camera Data Dense Pre-training}, 
       author={Yan Yang and Liyuan Pan and Liu Liu},
@@ -50,4 +49,4 @@ python dataset.py
       primaryClass={cs.CV},
       url={https://arxiv.org/abs/2311.11533}, 
 }
-
+```
