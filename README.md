@@ -66,10 +66,10 @@ ECDDP is built using the awesome [tartanair_tools](https://github.com/castacks/t
 ## Citation
 
 ```
-@misc{yang2023eventcameradatadense,
+@misc{yang2024eventcameradatadense,
       title={Event Camera Data Dense Pre-training}, 
       author={Yan Yang and Liyuan Pan and Liu Liu},
-      year={2023},
+      year={2024},
       eprint={2311.11533},
       archivePrefix={arXiv},
       primaryClass={cs.CV},
