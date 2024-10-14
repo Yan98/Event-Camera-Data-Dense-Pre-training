@@ -1,0 +1,89 @@
+name: swin_small
+precision: 16
+exp_path: experiments/pretrain/swin_small
+datasets:
+    persistent_workers: true
+    pin_memory: true
+    file: generate_data/file_path.txt
+    type: TartanairPretrainDataset
+    event_bins: 6
+    no_event_polarity: true
+    num_workers: 7
+    batch_size: 2  
+    crop_size: 320
+        
+network:
+    type: PretrainModel
+    img_size: 192
+    patch_size: 4
+    in_chans: 6
+    embed_dim: 96
+    depths:
+        - 2
+        - 2
+        - 6
+        - 2
+    num_heads:
+        - 3
+        - 6
+        - 12
+        - 24
+    out_indices:
+        - 0
+        - 1
+        - 2
+        - 3
+    window_size: 7
+    mlp_ratio: 4
+    qkv_bias: true
+    qk_scale: null
+    drop_rate: 0
+    drop_path_rate: 0
+    ape: false
+    patch_norm: true
+    use_checkpoint: false
+    cfg:
+        dino:
+            loss_weight: 1.0
+            head_n_prototypes: 32768
+            head_bottleneck_dim: 256
+            head_nlayers: 3
+            head_hidden_dim: 2048
+        ibot:
+            loss_weight: 1.0
+            mask_sample_probability: 0.5
+            mask_ratio_min_max:
+                - 0.1
+                - 0.5
+            separate_head: true
+            head_n_prototypes: 32768
+            head_bottleneck_dim: 256
+            head_nlayers: 3
+            head_hidden_dim: 2048
+        crops:
+            global_crops_scale:
+                - 0.32
+                - 1.0
+            local_crops_number: 8
+            local_crops_scale:
+                - 0.05
+                - 0.32
+            global_crops_size: 192
+            local_crops_size: 96
+            input_size: 224
+        train:
+            centering: sinkhorn_knopp  
+
+train:
+    type: TrainerPretrain
+    delay_epoch: 1
+    epoch: 300
+    moco_m: 0.992
+    base_lr: !!float 5e-4
+    warmup_epoch: 10
+    weight_decay: 0.04
+    weight_decay_end: 0.4 
+    max_grad_norm: 3   
+    save_every: 50
+    min_lr: !!float 1e-6
+    patch_embed_lr_scale: 0.2

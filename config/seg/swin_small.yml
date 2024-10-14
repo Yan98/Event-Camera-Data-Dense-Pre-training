@@ -1,0 +1,71 @@
+name: swin_small
+precision: 16
+exp_path: experiments/seg/swin_small
+        
+datasets:
+    dataset_path: ../datasets/DSEC ##### set the data path
+    nr_events_data: 10
+    fixed_duration: false
+    delta_t_per_data: null
+    event_representation: histogram
+    nr_events_window: 50000
+    nr_bins_per_data: 2
+    separate_pol: false
+    normalize_event: false
+    resize: true
+    num_workers: 8
+    batch_size: 8
+    persistent_workers: true
+    pin_memory: true
+      
+network:
+    type: SWINPad
+    load_teacher: false
+    pretrain_img_size: 192
+    patch_size: 4
+    in_chans: 20
+    embed_dim: 96
+    depths: 
+        - 2 
+        - 2 
+        - 6
+        - 2
+    num_heads: 
+        - 3
+        - 6
+        - 12
+        - 24
+    window_size: 7
+    mlp_ratio: 4
+    qkv_bias: true
+    qk_scale: null
+    drop_rate: 0
+    drop_path_rate: 0
+    ape: false
+    patch_norm: true
+    use_checkpoint: false
+    pretrained_checkpoint: checkpoint/pr.pt #####set the checkpoint path
+    keep_patch_keys: false
+
+    
+head_main:
+    in_channels: 
+        - 96
+        - 192
+        - 384
+        - 768
+    num_classes: 11
+
+head_aux:
+    in_channels: 384
+    in_index: 2
+    num_classes: 11    
+        
+train:
+    type: TrainerSeg
+    epoch: 50
+    base_lr: 0.008
+    warmup_epoch: 10
+    weight_decay: 0.05
+    check_val_every_n_epoch: 5
+    sync_batchnorm: true      

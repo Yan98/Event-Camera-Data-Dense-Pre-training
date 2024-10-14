@@ -2,7 +2,7 @@
 
 This repository contains the PyTorch code for our paper "Event Camera Data Dense Pre-training".
 
-> [paper]() | [arxiv](https://arxiv.org/abs/2311.11533) | [project page](https://yan98.github.io/ECDDP/)
+> [paper](./asset/paper.pdf) | [supp](./asset/supp.pdf) | [project page](https://yan98.github.io/ECDDP/)
 
 **The code and dataset will come soon!**
 
@@ -22,20 +22,46 @@ Transfer learning performance on downstream dense prediction tasks illustrates t
 </div>
 
 ## Requirement
-
-Please refer to [requirements.txt](./requirements.txt).
-
-## How to run
-
-```bash
-python main.py
-```
+- torch 2.2.1+cu118
+- mmseg 
+- pytorch-lightning 1.6.4
+- timm 0.9.16
+- kornia 0.7.1
+- torch_scatter 2.1.2+pt22cu118
+- opencv-python 4.9.0.80
+- pillow 10.2.0
+- albumentations 1.4.0
+- ttach 0.0.3
+- mmsegmentation 1.2.2
 
 ## How to get the dataset
 
-```bash
-python dataset.py
+Please refer to [`generate_data`](./generate_data).
+
+## How to pretrain
+
 ```
+python train_pretrain.py --opt ./config/pretrain/swin_small.yml --gpus #NUM_GPUS --num_nodes #NUM_NODES
+```
+
+We provide an example of pre-trained [swin-t/7](https://drive.google.com/file/d/12OOBZa1HupsI7-E-Ct8VhdK05O98yNoi/view?usp=sharing).
+
+## How to finetune
+
+Download the pre-trained model.
+
+```
+python3 train_seg.py --opt config/seg/swin_small.yml --gpus #NUM_GPUS --num_nodes #NUM_NODES #Please change dataset_path and pretrained_checkpoint in the config file
+python eval_seg.py --checkpoint *.pt  --opt config/seg/swin_small.yml #Please set the checkpoint path
+
+```
+
+
+## Contact
+If you have any questions relating to our work, do not hesitate to contact [me](mailto:yan.yang@anu.edu.au?subject=ECDDP).
+
+## Acknowledgement
+ECDDP is built using the awesome [tartanair_tools](https://github.com/castacks/tartanair_tools), [ess](https://github.com/uzh-rpg/ess), [BEiT](https://github.com/microsoft/unilm/tree/master/beit), [DinoV2](https://github.com/facebookresearch/dinov2), [EMA-VFI](https://github.com/MCG-NJU/EMA-VFI), and [mae](https://github.com/facebookresearch/mae).
 
 ## Citation
 
